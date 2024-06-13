@@ -1,8 +1,12 @@
 package Calculadora;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class OperacionesMatematicasTest {
+class OperacionesMatematicasDEML {
 
     @org.junit.jupiter.api.Test
     public void testCalcularRaizCuadrada() {
@@ -21,5 +25,4 @@ class OperacionesMatematicasTest {
             operaciones.calcularRaizCuadrada(-25.0);
         });
     }
-
 }
