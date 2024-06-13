@@ -1,28 +1,59 @@
 package Calculadora;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OperacionesMatematicasDEML {
 
-    @org.junit.jupiter.api.Test
-    public void testCalcularRaizCuadrada() {
-        OperacionesMatematicas operaciones = new OperacionesMatematicas();
+    OperacionesMatematicas operaciones;
 
-        // Caso 1: Raíz cuadrada de un número positivo
-        double resultadoPositivo = operaciones.calcularRaizCuadrada(25.0);
-        assertEquals(5.0, resultadoPositivo, 0.0001);
+    @BeforeEach
+    void alIniciar() {
+        operaciones = new OperacionesMatematicas();
+    }
 
-        // Caso 2: Raíz cuadrada de cero
-        double resultadoCero = operaciones.calcularRaizCuadrada(0.0);
-        assertEquals(0.0, resultadoCero, 0.0001);
+    @AfterEach
+    void alFinalizar() {
+        operaciones = null;
+    }
 
-        // Caso 3: Raíz cuadrada de un número negativo (debe lanzar una excepción)
+    @BeforeAll
+    static void alIniciarTodasLasPruebas() {
+        System.out.println("Iniciar todas las pruebas");
+    }
+
+    @AfterAll
+    static void alFinalizarTodasLasPruebas() {
+        System.out.println("Finalizar todas las pruebas");
+    }
+
+    @Test
+    @Order(1)
+    void calcularRaizCuadradaNumeroPositivo() {
+        double numero = 25.0;
+        double resultadoEsperado = 5.0;
+        double resultado = operaciones.calcularRaizCuadrada(numero);
+        assertEquals(resultadoEsperado, resultado, 0.0001);
+    }
+
+    @Test
+    @Order(2)
+    void calcularRaizCuadradaDeCero() {
+        double numero = 0.0;
+        double resultadoEsperado = 0.0;
+        double resultado = operaciones.calcularRaizCuadrada(numero);
+        assertEquals(resultadoEsperado, resultado, 0.0001);
+    }
+
+    @Test
+    @Order(3)
+    void calcularRaizCuadradaNumeroNegativo() {
+        double numero = -25.0;
         assertThrows(IllegalArgumentException.class, () -> {
-            operaciones.calcularRaizCuadrada(-25.0);
+            operaciones.calcularRaizCuadrada(numero);
         });
     }
 }
